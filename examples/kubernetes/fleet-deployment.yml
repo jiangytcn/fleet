@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fleet-webserver
@@ -20,7 +20,7 @@ spec:
             secretName: fleet-tls
       containers:
       - name: fleet-webserver
-        image: kolide/fleet:1.0.5
+        image: kolide/fleet:2.4.0
         command: ["fleet", "serve"]
         ports:
           - containerPort: 443
@@ -37,7 +37,7 @@ spec:
                 name: fleet-database-mysql
                 key: mysql-password
           - name: KOLIDE_REDIS_ADDRESS
-            value: fleet-cache-redis:6379
+            value: fleet-cache-redis-master:6379
           - name: KOLIDE_REDIS_PASSWORD
             valueFrom:
               secretKeyRef:
